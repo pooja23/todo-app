@@ -48,8 +48,13 @@
             <div class="add-card">
                 <mat-card>
                     <div [formGroup]="todoForm" class="text-center">
-                        <input type="input" formControlName="todo" placeholder="enter list name"/>
-                        <div class="help-text">*List name is mandatory</div>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>list name</mat-label>
+                            <input type="input" matInput formControlName="todo" placeholder="enter list name"/>
+                            <mat-error *ngIf="todoForm.invalid">
+                                List Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
                     <div class="text-center">
                         <button class="btn btn-primary" [disabled]="todoForm.invalid" (click)="addList()">Add another list</button>
