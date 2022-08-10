@@ -1,0 +1,39 @@
+.col-md-3 {
+    mat-card {
+        background-color: #a3e1f5
+    }
+    .add-card {
+        height: 100%;
+        background-color: #b6edf6;
+        padding: 10px 0;
+    }
+}
+mat-card {
+    background-color: #faf396;
+    margin: 10px;
+
+    .title {
+        text-transform: uppercase;
+        color: #96968a;
+    }
+
+    .card-input {
+        padding: 5px;
+    }
+    button {
+        margin: 4px;
+    }
+
+    .help-text {
+        color: red;
+        font-size: small;
+    }
+
+    mat-card {
+        background-color: #e9e7d2;
+        margin: 3px;
+    }
+}
+:host .mat-form-field {
+    width: 100%;
+}

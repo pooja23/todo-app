@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row" cdkDropListGroup>
+                <div class="col-md-4" *ngFor="let todo of todoList; let parentIndex = index">
+                    <mat-card>
+                        <mat-card-title><div class="title">{{todo.title}}</div></mat-card-title>
+                        <div cdkDropList
+                        [cdkDropListData]="todo.items"
+                        (cdkDropListDropped)="drop($event)">
+                            <mat-card-content *ngFor="let item of todo.items;let i = index" cdkDrag>
+                                <mat-card>
+                                    <mat-card-content>
+                                        <div class="row">
+                                            <div class="col-9"><span>{{item}}</span></div>
+                                            <div class="col-3">
+                                                <a href="javascript:void(0)" (click)="deleteItem(todo.items, i)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </mat-card-content>
+                                </mat-card>
+                            </mat-card-content>
+                        </div>
+                        <ng-container *ngIf="!todo.showAddItemForm; else addItemForm">
+                            <mat-card-actions>
+                                <div class="text-center">
+                                    <button class="btn btn-primary" (click)="todo.showAddItemForm = true">Add a card</button>
+                                </div>
+                            </mat-card-actions>
+                        </ng-container>
+                        <ng-template #addItemForm>
+                            <div class="text-center">
+                                <div class="card-input">
+                                    <input type="input" [(ngModel)]="todo.itemsToAdd" placeholder="Enter item to add"/>
+                                    <div class="help-text">*Item name is mandatory</div>
+                                </div>
+                                <button class="btn btn-primary" [disabled]="!todo.itemsToAdd" (click)="addTodoListItem(todo, todo.itemsToAdd)">Add item</button>
+                                <button class="btn btn-secondary" (click)="todo.showAddItemForm = false">cancel</button>
+                            </div>
+                        </ng-template>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="add-card">
+                <mat-card>
+                    <div [formGroup]="todoForm" class="text-center">
+                        <input type="input" formControlName="todo" placeholder="enter list name"/>
+                        <div class="help-text">*List name is mandatory</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" [disabled]="todoForm.invalid" (click)="addList()">Add another list</button>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+  
